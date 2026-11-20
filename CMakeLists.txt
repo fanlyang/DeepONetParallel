@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 3.16)
+find_package(deal.II 9.7.1 REQUIRED HINTS
+  "${DEAL_II_DIR}" "$ENV{DEAL_II_DIR}" "/opt/dealii-9.7.1-codim")
+deal_ii_initialize_cached_variables()
+project(torus_patch_mpi LANGUAGES CXX)
+find_package(MPI REQUIRED COMPONENTS CXX)
+add_executable(torus_patch_mpi src/main.cpp)
+target_compile_features(torus_patch_mpi PRIVATE cxx_std_17)
+target_link_libraries(torus_patch_mpi MPI::MPI_CXX)
+deal_ii_setup_target(torus_patch_mpi)
